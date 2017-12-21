@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 /*
  * 
  * Need to ADD:  
- * 
+ *  
  * Make sure dealer handling of aces (and soft 17 for example) is correct
  * Splitting
  * Bug - splitting sometimes (rarely) shows enabled, when it shouldn't
