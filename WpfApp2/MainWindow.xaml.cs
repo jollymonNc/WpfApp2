@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 /*
  * 
- * Need to ADD:
+ * Need to ADD:  
  * 
  * Make sure dealer handling of aces (and soft 17 for example) is correct
  * Splitting
