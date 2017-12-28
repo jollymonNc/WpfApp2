@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Resources;
+using System.IO;
 
 /*
  * 
@@ -61,6 +63,8 @@ namespace WpfApp2
         King
     }
 
+
+
     public enum PlayResult
     {
         push,
@@ -74,13 +78,15 @@ namespace WpfApp2
     /// </summary>
     public partial class MainWindow : Window
     {
-        Blackjack myBlackjack;
-
+        public Blackjack myBlackjack;
+   
         public MainWindow()
         {
             InitializeComponent();
 
             myBlackjack = new Blackjack(6);
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -133,14 +139,27 @@ namespace WpfApp2
         private Hand dealerHand;
         private List<Player> players;
         private int numDecks;
-  
+        Image[,] cardImageSlot = new Image[2,5];
+
         MainWindow Form = Application.Current.Windows[0] as MainWindow;
+        
 
         public Blackjack(int numDecks)
         {
+            cardImageSlot[0,0] = Form.CardImage_S11;
+            cardImageSlot[0,1] = Form.CardImage_S12;
+            cardImageSlot[0,2] = Form.CardImage_S13;
+            cardImageSlot[0,3] = Form.CardImage_S14;
+            cardImageSlot[0,4] = Form.CardImage_S15;
+            cardImageSlot[1,0] = Form.CardImage_S11;
+            cardImageSlot[1,1] = Form.CardImage_S12;
+            cardImageSlot[1,2] = Form.CardImage_S13;
+            cardImageSlot[1,3] = Form.CardImage_S14;
+            cardImageSlot[1,4] = Form.CardImage_S15;
+
             players = new List<Player>();
 
-            players.Add(new Player());
+            players.Add(new Player(cardImageSlot));
 
             Form.CurrentBet.Text = "10.00";
 
@@ -156,6 +175,8 @@ namespace WpfApp2
 
         public void Deal()
         {
+            Image[] currentSlot = new Image[5];
+
             enableBetButtons(true);
             Form.ResultText.Text = "";
 
@@ -168,7 +189,10 @@ namespace WpfApp2
                 myCardDeck.GetNextCard();
             }
 
-            dealerHand = new Hand();
+            for (int i = 0; i < 5; i++)
+                currentSlot[i] = cardImageSlot[0, i];
+
+            dealerHand = new Hand(currentSlot);
             players[0].newDeal();
 
             // Deal cards
@@ -203,6 +227,7 @@ namespace WpfApp2
                 dealerHand.Add(myCardDeck.GetNextCard());
 
             Form.DealerHand.Text = dealerHand.getDisplayText();
+            Display.DisplayHand(1, dealerHand);
 
             // process whether we won or lost
             players[0].TrueUp(dealerHand.value);
@@ -227,7 +252,7 @@ namespace WpfApp2
                 players[0].ProcessGameResult(PlayResult.blackjack, players[0].getCurrentBetValue());
                 return true;
             }
-
+            
             return false;
         }
 
@@ -284,12 +309,14 @@ namespace WpfApp2
         private Money myMoney;
         private List<Hand> myHands;
         private int currentHand;
+        Image [,]cardImageSlot;
 
         MainWindow Form = Application.Current.Windows[0] as MainWindow;
 
-        public Player ()
+        public Player (Image [,] cardImageSlot)
         {
             currentHand = 0;
+            this.cardImageSlot = cardImageSlot;
             myHands = new List<Hand>();
             myMoney = new Money(200.00m);
         }
@@ -304,13 +331,18 @@ namespace WpfApp2
 
         public void AddHand ()
         {
-            myHands.Add(new Hand());
+            Image [] currentSlot = new Image [5];
+
+            for (int i = 0; i < 5; i++)
+                currentSlot[i] = cardImageSlot[currentHand, i];
+            myHands.Add(new Hand(currentSlot));
         }
 
         public Boolean AddCard (Card newCard)
         {
             myHands[currentHand].Add(newCard);
             Form.Hand1.Text = myHands[currentHand].getDisplayText();
+            Display.DisplayHand(0, myHands[currentHand]);
 
             if (myHands[currentHand].value > 21)
             {
@@ -368,11 +400,16 @@ namespace WpfApp2
             myHands[currentHand].Add(newCard);
 
             Form.Hand1.Text = myHands[currentHand].getDisplayText();
+            Display.DisplayHand(0, myHands[currentHand]);
         }
 
         public void Split (Card newCard)
         {
             Card splitCard;
+            Image[] currentSlot = new Image[5];
+
+            for (int i = 0; i < 5; i++)
+                currentSlot[i] = cardImageSlot[1, i];
 
             splitCard = myHands[currentHand].handCards[1];
             myHands[currentHand].Remove(1);
@@ -380,10 +417,11 @@ namespace WpfApp2
             myHands[currentHand].Add(newCard); // Add the new card to the first hand
 
             // Creat a new hand and add the split off card to it
-            myHands.Add(new Hand());
+            myHands.Add(new Hand(currentSlot));
             myHands[myHands.Count-1].Add(splitCard);
 
             Form.Hand1.Text = myHands[currentHand].getDisplayText();
+            Display.DisplayHand(0, myHands[currentHand]);
         }
         public Boolean PlayNextHand()
         {
@@ -394,6 +432,7 @@ namespace WpfApp2
                 currentHand++;
 
                 Form.Hand1.Text = myHands[currentHand].getDisplayText();
+                Display.DisplayHand(0, myHands[currentHand]);
 
                 return true;
             }
@@ -424,6 +463,7 @@ namespace WpfApp2
             }
         }
     }
+
 
     public class Money
     {
@@ -456,12 +496,26 @@ namespace WpfApp2
         public List<Card> handCards;
         public int value;  // Blackjack count (0-21)
         public decimal bet;
+        Image [] cardImageSlot = new Image [5];
 
         MainWindow Form = Application.Current.Windows[0] as MainWindow;
 
-        public Hand ()
+        public Hand (Image [] myCardImageSlot)
         {
             handCards = new List<Card>();
+
+            for (int i = 0; i < 5; i++)
+                cardImageSlot[i] = myCardImageSlot[i];
+
+            //cardImageSlot = myCardImageSlot;
+            /*cardImageSlot[0] = Form.CardImage_S11;
+            cardImageSlot[1] = Form.CardImage_S12;
+            cardImageSlot[2] = Form.CardImage_S13;
+            cardImageSlot[3] = Form.CardImage_S14;
+            cardImageSlot[4] = Form.CardImage_S15;*/
+
+            // cardImageSlot[2].Source = new BitmapImage(new Uri("Resources/6_of_hearts.png", UriKind.Relative));
+
             value = 0;
             try
             {
@@ -517,6 +571,16 @@ namespace WpfApp2
             }
             myText.Append(value);
 
+            // Show the cards
+            /*
+            for (int i = 0; i < 5; i++)
+                cardImageSlot[i].Source = null;
+
+            for (int i = 0; i < handCards.Count; i++)
+                //cardImageSlot[i].Source = handCards[i].cardImage.Source;
+                Display.DisplayHand(0, 0, handCards[i].cardImage);*/
+            //Display.DisplayHand(0, this);
+
             return myText.ToString();
         }
 
@@ -538,12 +602,27 @@ namespace WpfApp2
         public Suit suit;
         public CardRank rank;
         public int FaceValue;
-        
+        public Image cardImage;
+
+        public string[,] cardImageSources = new string[4, 13] 
+        {
+            {"Resources/ace_of_clubs.png","Resources/2_of_clubs.png","Resources/3_of_clubs.png","Resources/4_of_clubs.png","Resources/5_of_clubs.png","Resources/6_of_clubs.png","Resources/7_of_clubs.png","Resources/8_of_clubs.png","Resources/9_of_clubs.png","Resources/10_of_clubs.png","Resources/jack_of_clubs.png","Resources/queen_of_clubs.png","Resources/king_of_clubs.png"},  // clubs
+            {"Resources/ace_of_diamonds.png","Resources/2_of_diamonds.png","Resources/3_of_diamonds.png","Resources/4_of_diamonds.png","Resources/5_of_diamonds.png","Resources/6_of_diamonds.png","Resources/7_of_diamonds.png","Resources/8_of_diamonds.png","Resources/9_of_diamonds.png","Resources/10_of_diamonds.png","Resources/jack_of_diamonds.png","Resources/queen_of_diamonds.png","Resources/king_of_diamonds.png"},  // diamonds
+            {"Resources/ace_of_spades.png","Resources/2_of_spades.png","Resources/3_of_spades.png","Resources/4_of_spades.png","Resources/5_of_spades.png","Resources/6_of_spades.png","Resources/7_of_spades.png","Resources/8_of_spades.png","Resources/9_of_spades.png","Resources/10_of_spades.png","Resources/jack_of_spades.png","Resources/queen_of_spades.png","Resources/king_of_spades.png"},  // spades
+            {"Resources/ace_of_hearts.png","Resources/2_of_hearts.png","Resources/3_of_hearts.png","Resources/4_of_hearts.png","Resources/5_of_hearts.png","Resources/6_of_hearts.png","Resources/7_of_hearts.png","Resources/8_of_hearts.png","Resources/9_of_hearts.png","Resources/10_of_hearts.png","Resources/jack_of_hearts.png","Resources/queen_of_hearts.png","Resources/king_of_hearts.png"}  // hearts
+        };
+
+
+
         // Constructor
         public Card (CardRank rank, Suit suit)
         {
             this.suit = suit;
             this.rank = rank;
+
+            cardImage = new Image();
+
+            this.cardImage.Source = new BitmapImage(new Uri(cardImageSources[(int)suit,(int)rank-1], UriKind.Relative));
 
             this.FaceValue = (int) rank;
             if (FaceValue > 10)
@@ -622,6 +701,39 @@ namespace WpfApp2
                 return true;
             else
                 return false;
+        }
+
+    }
+
+    public static class Display
+    {
+        private static Image[,] cardImageSlot = new Image[2, 5];
+
+        static Display()
+        {
+            MainWindow Form = Application.Current.Windows[0] as MainWindow;
+
+            cardImageSlot[0, 0] = Form.CardImage_S11;
+            cardImageSlot[0, 1] = Form.CardImage_S12;
+            cardImageSlot[0, 2] = Form.CardImage_S13;
+            cardImageSlot[0, 3] = Form.CardImage_S14;
+            cardImageSlot[0, 4] = Form.CardImage_S15;
+            cardImageSlot[1, 0] = Form.CardImage_S21;
+            cardImageSlot[1, 1] = Form.CardImage_S22;
+            cardImageSlot[1, 2] = Form.CardImage_S23;
+            cardImageSlot[1, 3] = Form.CardImage_S24;
+            cardImageSlot[1, 4] = Form.CardImage_S25;
+        }
+
+        public static void DisplayHand(int playerNumber, Hand myHand)
+        {
+            MainWindow Form = Application.Current.Windows[0] as MainWindow;
+
+            for (int i = 0; i < 5; i++)
+                cardImageSlot[playerNumber,i].Source = null;
+
+            for (int i = 0; i < myHand.handCards.Count; i++)
+                cardImageSlot[playerNumber,i].Source = myHand.handCards[i].cardImage.Source;
         }
 
     }

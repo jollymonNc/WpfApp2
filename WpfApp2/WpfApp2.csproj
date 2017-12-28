@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,13 +81,88 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\queen_of_clubs.png" />
+    <Resource Include="Resources\queen_of_diamonds.png" />
+    <Resource Include="Resources\queen_of_hearts.png" />
+    <Resource Include="Resources\queen_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\10_of_clubs.png" />
+    <Resource Include="Resources\10_of_diamonds.png" />
+    <Resource Include="Resources\10_of_hearts.png" />
+    <Resource Include="Resources\10_of_spades.png" />
+    <Resource Include="Resources\2_of_clubs.png" />
+    <Resource Include="Resources\2_of_diamonds.png" />
+    <Resource Include="Resources\2_of_hearts.png" />
+    <Resource Include="Resources\2_of_spades.png" />
+    <Resource Include="Resources\3_of_clubs.png" />
+    <Resource Include="Resources\3_of_diamonds.png" />
+    <Resource Include="Resources\3_of_hearts.png" />
+    <Resource Include="Resources\3_of_spades.png" />
+    <Resource Include="Resources\4_of_clubs.png" />
+    <Resource Include="Resources\4_of_diamonds.png" />
+    <Resource Include="Resources\4_of_hearts.png" />
+    <Resource Include="Resources\4_of_spades.png" />
+    <Resource Include="Resources\5_of_clubs.png" />
+    <Resource Include="Resources\5_of_diamonds.png" />
+    <Resource Include="Resources\5_of_hearts.png" />
+    <Resource Include="Resources\5_of_spades.png" />
+    <Resource Include="Resources\6_of_clubs.png" />
+    <Resource Include="Resources\6_of_diamonds.png" />
+    <Resource Include="Resources\6_of_hearts.png" />
+    <Resource Include="Resources\6_of_spades.png" />
+    <Resource Include="Resources\7_of_clubs.png" />
+    <Resource Include="Resources\7_of_diamonds.png" />
+    <Resource Include="Resources\7_of_hearts.png" />
+    <Resource Include="Resources\7_of_spades.png" />
+    <Resource Include="Resources\8_of_clubs.png" />
+    <Resource Include="Resources\8_of_diamonds.png" />
+    <Resource Include="Resources\8_of_hearts.png" />
+    <Resource Include="Resources\8_of_spades.png" />
+    <Resource Include="Resources\9_of_clubs.png" />
+    <Resource Include="Resources\9_of_diamonds.png" />
+    <Resource Include="Resources\9_of_hearts.png" />
+    <Resource Include="Resources\9_of_spades.png" />
+    <Resource Include="Resources\ace_of_clubs.png" />
+    <Resource Include="Resources\ace_of_diamonds.png" />
+    <Resource Include="Resources\ace_of_hearts.png" />
+    <Resource Include="Resources\ace_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\jack_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\jack_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\jack_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\jack_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\king_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\king_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\king_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\king_of_spades.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
