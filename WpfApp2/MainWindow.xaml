@@ -11,23 +11,23 @@
     <Grid>
 
         <ListBox x:Name="CardListBox" HorizontalAlignment="Left" Height="634" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="DealerHand" HorizontalAlignment="Left" Height="115" Margin="146,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="161"/>
-        <Button Content="Restart" HorizontalAlignment="Left" Margin="146,199,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="9.859,-0.57"/>
+        <TextBox x:Name="DealerHand" HorizontalAlignment="Left" Height="35" Margin="146,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="161"/>
+        <Button Content="Restart" HorizontalAlignment="Left" Margin="873,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" RenderTransformOrigin="9.859,-0.57"/>
         <TextBlock HorizontalAlignment="Left" Height="20" Margin="189,19,0,0" TextWrapping="Wrap" Text="Dealer" VerticalAlignment="Top" Width="45"/>
-        <TextBox x:Name="Hand1" HorizontalAlignment="Left" Height="115" Margin="425,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="176"/>
-        <TextBox x:Name="Hand2" HorizontalAlignment="Left" Height="115" Margin="677,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="190"/>
-        <Button x:Name="StandButton" Content="Stand" HorizontalAlignment="Left" Margin="425,211,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <Button x:Name="HitButton" Content="Hit" HorizontalAlignment="Left" Margin="526,211,0,0" VerticalAlignment="Top" Width="75" Click="HitButton_Click"/>
-        <Button x:Name="DoubleButton" Content="Double" HorizontalAlignment="Left" Margin="629,211,0,0" VerticalAlignment="Top" Width="75" Click="DoubleButton_Click"/>
+        <TextBox x:Name="Hand1" HorizontalAlignment="Left" Height="35" Margin="425,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="176"/>
+        <TextBox x:Name="Strategy_Eval" HorizontalAlignment="Left" Height="35" Margin="677,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" FontWeight="Bold" FontSize="14"/>
+        <Button x:Name="StandButton" Content="Stand" HorizontalAlignment="Left" Margin="146,113,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button x:Name="HitButton" Content="Hit" HorizontalAlignment="Left" Margin="255,113,0,0" VerticalAlignment="Top" Width="75" Click="HitButton_Click"/>
+        <Button x:Name="DoubleButton" Content="Double" HorizontalAlignment="Left" Margin="367,113,0,0" VerticalAlignment="Top" Width="75" Click="DoubleButton_Click"/>
         <TextBlock HorizontalAlignment="Left" Height="20" Margin="425,19,0,0" TextWrapping="Wrap" Text="Hand1" VerticalAlignment="Top" Width="45" RenderTransformOrigin="6.096,0.434"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="677,19,0,0" TextWrapping="Wrap" Text="Hand2" VerticalAlignment="Top" Width="45" RenderTransformOrigin="6.096,0.434"/>
-        <Button x:Name="DealButton" Content="Deal" HorizontalAlignment="Left" Margin="755,211,0,0" VerticalAlignment="Top" Width="75" Click="DealButton_Click"/>
-        <TextBlock x:Name="ResultText" HorizontalAlignment="Left" Margin="299,198,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="0.24,-4.938"/>
-        <TextBlock x:Name="Current_Pot_Text" HorizontalAlignment="Left" Margin="664,271,0,0" TextWrapping="Wrap" Text="Current Pot: " VerticalAlignment="Top"/>
-        <TextBlock x:Name="CurrentPot" HorizontalAlignment="Left" Margin="745,271,0,0" TextWrapping="Wrap" Text="$0" VerticalAlignment="Top" RenderTransformOrigin="-0.277,0.439"/>
-        <TextBlock x:Name="CurrentBetText" HorizontalAlignment="Left" Margin="664,308,0,0" TextWrapping="Wrap" Text="Current Bet:     $" VerticalAlignment="Top" RenderTransformOrigin="0.334,-0.326"/>
-        <TextBox x:Name="CurrentBet" HorizontalAlignment="Left" Height="23" Margin="755,307,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.226,0.902" TextChanged="TextBox_TextChanged"/>
-        <Button x:Name="SplitButton" Content="Split" HorizontalAlignment="Left" Margin="425,253,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" Click="SplitButton_Click" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="677,19,0,0" TextWrapping="Wrap" Text="Evaluation" VerticalAlignment="Top" Width="73" RenderTransformOrigin="6.096,0.434"/>
+        <Button x:Name="DealButton" Content="Deal" HorizontalAlignment="Left" Margin="146,199,0,0" VerticalAlignment="Top" Width="75" Click="DealButton_Click"/>
+        <TextBlock x:Name="ResultText" Margin="760,295,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="0.24,-4.938" FontSize="24" Foreground="#FFF9F1F1"/>
+        <TextBlock x:Name="Current_Pot_Text" HorizontalAlignment="Left" Margin="591,115,0,0" TextWrapping="Wrap" Text="Current Pot: " VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock x:Name="CurrentPot" HorizontalAlignment="Left" Margin="737,113,0,0" TextWrapping="Wrap" Text="$0" VerticalAlignment="Top" RenderTransformOrigin="-0.277,0.439" FontSize="16"/>
+        <TextBlock x:Name="CurrentBetText" HorizontalAlignment="Left" Margin="591,159,0,0" TextWrapping="Wrap" Text="Current Bet:     $" VerticalAlignment="Top" RenderTransformOrigin="0.334,-0.326" FontSize="16"/>
+        <TextBox x:Name="CurrentBet" HorizontalAlignment="Left" Height="23" Margin="737,158,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.226,0.902" TextChanged="TextBox_TextChanged" FontSize="16"/>
+        <Button x:Name="SplitButton" Content="Split" HorizontalAlignment="Left" Margin="200,152,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" Click="SplitButton_Click" IsEnabled="False"/>
         <WrapPanel HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
         <UniformGrid Margin="176,463,448,63">
             <Image x:Name="CardImage_S11" HorizontalAlignment="Left" Height="128" Margin="0,0,0,-85" VerticalAlignment="Top" Width="85" />
@@ -43,5 +43,15 @@
             <Image x:Name="CardImage_S24" HorizontalAlignment="Left" Height="128" Margin="178,-43,-152,-42" VerticalAlignment="Top" Width="85" />
             <Image x:Name="CardImage_S25" HorizontalAlignment="Left" Height="128" Margin="138,-43,-112,-42" VerticalAlignment="Top" Width="85" />
         </UniformGrid>
+        <UniformGrid Margin="553,459,71,67" RenderTransformOrigin="1.44,-0.055">
+            <Image x:Name="CardImage_S31" HorizontalAlignment="Left" Height="128" Margin="0,0,0,-85" VerticalAlignment="Top" Width="85" />
+            <Image x:Name="CardImage_S32" HorizontalAlignment="Left" Height="128" Margin="-49,0,0,-85" VerticalAlignment="Top" Width="85" />
+            <Image x:Name="CardImage_S33" HorizontalAlignment="Left" Height="128" Margin="-105,0,0,-85" VerticalAlignment="Top" Width="85" />
+            <Image x:Name="CardImage_S34" HorizontalAlignment="Left" Height="128" Margin="178,-43,-152,-42" VerticalAlignment="Top" Width="85" />
+            <Image x:Name="CardImage_S35" HorizontalAlignment="Left" Height="128" Margin="138,-43,-112,-42" VerticalAlignment="Top" Width="85" />
+        </UniformGrid>
+        <Button x:Name="SurrenderButton" Content="Surrender" HorizontalAlignment="Left" Height="20" Margin="317,152,0,0" VerticalAlignment="Top" Width="75" Click="SurrenderButton_Click_1"/>
+        <TextBlock x:Name="NumberRight" HorizontalAlignment="Left" Height="24" Margin="760,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97" FontSize="18"/>
+        <TextBlock x:Name="PercentageRight" Height="24" Margin="759,387,101,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
     </Grid>
 </Window>
